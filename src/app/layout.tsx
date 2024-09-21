@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import { ActiveProvider } from "@/components/providers/ActiveProvider";
+import { CursorFollowerProvider } from "@/components/providers/CursorFollowerProvider";
 import { cn } from "@/utils/cn";
 
 import "./globals.css";
@@ -22,8 +23,10 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" className="h-full bg-black">
-      <body className={cn(montserrat.className, "h-full antialiased")}>
-        <ActiveProvider>{children}</ActiveProvider>
+      <body className={cn(montserrat.className, "h-full")}>
+        <ActiveProvider>
+          <CursorFollowerProvider>{children}</CursorFollowerProvider>
+        </ActiveProvider>
       </body>
     </html>
   );

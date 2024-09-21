@@ -26,35 +26,35 @@ export default function Badge() {
   return (
     <Canvas camera={{ position: [0, 0, 10], fov: 25 }}>
       <ambientLight intensity={Math.PI} />
-      <Physics interpolate gravity={[0, -60, 0]} timeStep={1 / 60}>
+      <Physics interpolate gravity={[0, -80, 0]} timeStep={1 / 60}>
         <Band />
       </Physics>
       <Environment background blur={0.75}>
         <color attach="background" args={["white"]} />
         <Lightformer
-          intensity={2}
-          color="red"
+          intensity={1}
+          color="yellow"
           position={[0, -1, 5]}
           rotation={[0, 0, Math.PI / 3]}
           scale={[100, 0.1, 1]}
         />
         <Lightformer
-          intensity={3}
-          color="red"
+          intensity={1}
+          color="yellow"
           position={[-1, -1, 1]}
           rotation={[0, 0, Math.PI / 3]}
           scale={[100, 0.1, 1]}
         />
         <Lightformer
-          intensity={3}
-          color="red"
+          intensity={1}
+          color="yellow"
           position={[1, 1, 1]}
           rotation={[0, 0, Math.PI / 3]}
           scale={[100, 0.1, 1]}
         />
         <Lightformer
-          intensity={10}
-          color="red"
+          intensity={1}
+          color="yellow"
           position={[-10, 0, 14]}
           rotation={[0, Math.PI / 2, Math.PI / 3]}
           scale={[100, 10, 1]}

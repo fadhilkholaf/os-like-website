@@ -12,16 +12,29 @@ const variants: Variants = {
   animate: { opacity: 1, y: 0 },
 };
 
-const projects: { title: string; description: string; image: string }[] = [
+const projects: {
+  title: string;
+  year: string;
+  description: string;
+  image: string;
+}[] = [
   {
-    title: "Antareja",
-    image: "fadhil.jpeg",
-    description: "lorem ipsum dolor sit amet 1234567890",
+    title: "Kemenag Kota Malang",
+    year: "2024",
+    image: "/image/project/kemenag.png",
+    description: "Kementrian Agama Kota Malang employee performance report.",
+  },
+  {
+    title: "LKBB Antareja",
+    year: "2024",
+    image: "/image/project/antareja.png",
+    description: "Aksi Telkom Barisan Jawara competition by SMK Telkom Malang.",
   },
   {
     title: "Moklet.org",
-    image: "flower.jpg",
-    description: "ambatukam ambatubas ambatublow ambatunat",
+    year: "2024",
+    image: "/image/project/mokletorg.png",
+    description: "SMK Telkom Malang organization website.",
   },
 ];
 
@@ -44,12 +57,12 @@ const Project = () => {
             variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
           >
             <motion.img
-              src={"/image/" + projects[selected].image}
+              src={projects[selected].image}
               alt="project"
               width={500}
               height={500}
               loading="lazy"
-              className="h-1/2 w-full rounded-lg object-cover"
+              className="h-1/3 w-full rounded-lg object-cover grayscale hover:grayscale-0 hover:transition-all hover:duration-300"
               variants={variants}
             />
             <div className="flex flex-col gap-4">
@@ -65,17 +78,21 @@ const Project = () => {
           <H1 variants={variants}>Featured</H1>
         </div>
         <HR />
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-4 overflow-y-auto">
           {projects.map((project, i) => (
             <motion.li
               key={i}
-              className={cn("rounded-lg bg-white/10 p-4 hover:bg-white/20", {
-                "bg-white/20": selected === i,
-              })}
+              className={cn(
+                "flex cursor-pointer justify-between rounded-lg bg-white/10 p-4 hover:bg-white/20",
+                {
+                  "bg-white/30": selected === i,
+                },
+              )}
               variants={variants}
               onClick={() => setSelected(i)}
             >
               <P>{project.title}</P>
+              <P>{project.year}</P>
             </motion.li>
           ))}
         </ul>

@@ -2,12 +2,21 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-import { motion, Variants } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  Variants,
+} from "framer-motion";
 
-import { H1, H3, H4, P } from "@/components/global/Text";
-import { about as data } from "@/utils/data";
 import HR from "@/components/global/HR";
+import { H1, H3, H4, P } from "@/components/global/Text";
+import { useCursorFollower } from "@/components/providers/CursorFollowerProvider";
+import { about as data } from "@/utils/data";
 
 const Badge = dynamic(() => import("@/components/models/Badge"), {
   ssr: false,
@@ -24,9 +33,24 @@ const variants: Variants = {
 };
 
 const About = () => {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    container: containerRef,
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+  const translateY = useSpring(
+    useTransform(scrollYProgress, [0, 1], ["100%", "0%"]),
+    { bounce: 0.1 },
+  );
+
+  const { setContent } = useCursorFollower();
+
   return (
     <motion.div
-      className="flex h-full w-full max-w-[1280px] flex-col gap-y-8 overflow-y-auto"
+      ref={containerRef}
+      className="flex h-full w-full max-w-[1280px] flex-col gap-y-8 overflow-y-auto pb-4"
       variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
     >
       <div className="flex flex-col">
@@ -121,17 +145,43 @@ const About = () => {
             </ul>
           </div>
           <HR />
+          <div className="flex gap-x-4">
+            {data.social.map((item, i) => (
+              <motion.div
+                key={i}
+                variants={variants}
+                onPointerEnter={() => setContent(item.title)}
+                onPointerLeave={() => setContent("")}
+              >
+                <Link href={item.url} target="_blank">
+                  <Image
+                    src={item.icon}
+                    alt="icon"
+                    width={50}
+                    height={50}
+                    className="h-8 w-8 rounded-lg object-cover"
+                  />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
         <div className="relative flex h-full w-1/4 flex-col gap-y-4">
-          <motion.img
-            src="/image/fadhil.jpeg"
-            alt="about"
-            width={500}
-            height={500}
-            loading="lazy"
-            className="h-fit w-full rounded-lg object-cover"
-            variants={variants}
-          />
+          <div className="overflow-hidden rounded-lg">
+            <motion.img
+              ref={imageRef}
+              src="/image/drawingcloser.jpeg"
+              alt="about"
+              width={500}
+              height={500}
+              loading="lazy"
+              className="w-full object-cover"
+              style={{ translateY, scale: 1.5 }}
+              variants={variants}
+              onPointerEnter={() => setContent("❤️")}
+              onPointerLeave={() => setContent("")}
+            />
+          </div>
           <motion.div
             className="sticky top-0 h-[500px] overflow-hidden rounded-lg bg-white"
             variants={variants}

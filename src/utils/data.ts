@@ -1,18 +1,19 @@
-export const pages: { name: string }[] = [
+export const pages: { title: string; icon: string }[] = [
   {
-    name: "👨‍💻",
+    title: "About",
+    icon: "👨‍💻",
   },
   {
-    name: "📁",
+    title: "Project",
+    icon: "📁",
   },
   {
-    name: "📱",
+    title: "Mood",
+    icon: "🫠",
   },
   {
-    name: "🫠",
-  },
-  {
-    name: "⬇️",
+    title: "Resource",
+    icon: "⬇️",
   },
 ];
 
@@ -29,6 +30,7 @@ export const about: {
     image: string;
   }[];
   organizations: { title: string; by: string; period: string }[];
+  social: { url: string; icon: string; title: string }[];
 } = {
   name: "Muhammad Fadhil Kholaf",
   role: "Front-end Developer",
@@ -82,6 +84,18 @@ export const about: {
       title: "METIC",
       by: "SMK Telkom Malang",
       period: "2022 - Present",
+    },
+  ],
+  social: [
+    {
+      url: "https://www.instagram.com/fadhilkholaf",
+      icon: "/image/icon/social/instagram.svg",
+      title: "Instagram",
+    },
+    {
+      url: "https://www.linkedin.com/in/fadhilkholaf",
+      icon: "/image/icon/social/linkedin.svg",
+      title: "LinkedIn",
     },
   ],
 };

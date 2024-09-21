@@ -5,6 +5,7 @@ import { useActive } from "@/components/providers/ActiveProvider";
 
 import About from "./components/parts/About";
 import Project from "./components/parts/Project";
+import Mood from "./components/parts/Mood";
 
 const variants: Variants = {
   open: {
@@ -15,7 +16,7 @@ const variants: Variants = {
   },
 };
 
-const Pages = [<About />, <Project />];
+const Pages = [<About />, <Project />, <Mood />];
 
 const Home = () => {
   const { active, open } = useActive();

@@ -36,7 +36,7 @@ export const useActive = () => {
   if (!context) {
     throw new Error({
       statusCode: 404,
-      title: "Active context must be used inside active provider!",
+      title: "ActiveContext must be used inside ActiveProvider!",
       withDarkMode: true,
     });
   }

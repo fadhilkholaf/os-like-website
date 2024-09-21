@@ -7,6 +7,7 @@ import { pages } from "@/utils/data";
 
 import { useActive } from "./providers/ActiveProvider";
 import { P } from "./global/Text";
+import { useCursorFollower } from "./providers/CursorFollowerProvider";
 
 const variants: Variants = {
   initial: { opacity: 0, y: 10 },
@@ -18,6 +19,7 @@ const variants: Variants = {
 
 const Navbar = ({ className }: { className?: string }) => {
   const { active, open, setActive, setOpen } = useActive();
+  const { setContent } = useCursorFollower();
 
   return (
     <motion.nav
@@ -66,8 +68,10 @@ const Navbar = ({ className }: { className?: string }) => {
                 }
                 setActive(i);
               }}
+              onPointerEnter={() => setContent(page.title)}
+              onPointerLeave={() => setContent("")}
             >
-              <P className="text-2xl">{page.name}</P>
+              <P className="text-2xl">{page.icon}</P>
             </motion.li>
           ))}
       </motion.ul>
