@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import {
   motion,
@@ -41,7 +41,7 @@ const About = () => {
     offset: ["start end", "end start"],
   });
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 1], ["100%", "0%"]),
+    useTransform(scrollYProgress, [0, 1], ["50%", "0%"]),
     { bounce: 0.1 },
   );
 
@@ -50,8 +50,10 @@ const About = () => {
   return (
     <motion.div
       ref={containerRef}
-      className="flex h-full w-full max-w-[1280px] flex-col gap-y-8 overflow-y-auto pb-4"
-      variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
+      className="flex h-full w-full max-w-[1280px] flex-col gap-y-8 overflow-y-scroll pb-4"
+      variants={{
+        animate: { transition: { staggerChildren: 0.05, delayChildren: 0.5 } },
+      }}
     >
       <div className="flex flex-col">
         <H3 variants={variants}>About</H3>
@@ -170,13 +172,13 @@ const About = () => {
           <div className="overflow-hidden rounded-lg">
             <motion.img
               ref={imageRef}
-              src="/image/drawingcloser.jpeg"
+              src="/image/fadhil.jpeg"
               alt="about"
               width={500}
               height={500}
               loading="lazy"
               className="w-full object-cover"
-              style={{ translateY, scale: 1.5 }}
+              style={{ translateY, scale: 1.2 }}
               variants={variants}
               onPointerEnter={() => setContent("❤️")}
               onPointerLeave={() => setContent("")}

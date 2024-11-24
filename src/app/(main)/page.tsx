@@ -16,7 +16,11 @@ const variants: Variants = {
   },
 };
 
-const Pages = [<About />, <Project />, <Mood />];
+const Pages = [
+  <About key="about" />,
+  <Project key="project" />,
+  <Mood key="mood" />,
+];
 
 const Home = () => {
   const { active, open } = useActive();

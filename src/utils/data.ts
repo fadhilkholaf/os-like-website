@@ -99,3 +99,29 @@ export const about: {
     },
   ],
 };
+
+export const projects: {
+  title: string;
+  year: string;
+  description: string;
+  image: string;
+}[] = [
+  {
+    title: "Kemenag Kota Malang",
+    year: "2024",
+    image: "/image/project/kemenag.png",
+    description: "Kementrian Agama Kota Malang employee performance report.",
+  },
+  {
+    title: "LKBB Antareja",
+    year: "2024",
+    image: "/image/project/antareja.png",
+    description: "Aksi Telkom Barisan Jawara competition by SMK Telkom Malang.",
+  },
+  {
+    title: "Moklet.org",
+    year: "2024",
+    image: "/image/project/mokletorg.png",
+    description: "SMK Telkom Malang organization website.",
+  },
+];

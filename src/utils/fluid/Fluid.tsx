@@ -27,7 +27,7 @@ type Uniforms = {
   uDissipation: number;
 };
 
-export const Fluid = ({
+const Fluid = ({
   blend = OPTS.blend,
   force = OPTS.force,
   radius = OPTS.radius,
@@ -173,7 +173,7 @@ export const Fluid = ({
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("touchmove", onPointerMove);
     };
-  }, []);
+  });
 
   return (
     <>
@@ -198,3 +198,5 @@ export const Fluid = ({
     </>
   );
 };
+
+export default Fluid;

@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 "use client";
 
 import * as THREE from "three";
@@ -91,7 +94,7 @@ function Band({
     linearDamping: 2,
   };
 
-  const { nodes, materials } = useGLTF("/models/id-telkom.glb") as any;
+  const { nodes, materials } = useGLTF("/models/id-telkom.glb");
   const texture = useTexture("/image/band.jpg");
   const { width, height } = useThree((state) => state.size);
   const [curve] = useState(
@@ -139,38 +142,29 @@ function Band({
 
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
-        // @ts-ignore
         if (!ref.current?.lerped) {
-          // @ts-ignore
           ref.current.lerped = new THREE.Vector3().copy(
-            // @ts-ignore
             ref.current.translation(),
           );
         }
         const clampedDistance = Math.max(
           0.1,
-          // @ts-ignore
           Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())),
-        ); // @ts-ignore
+        );
         ref.current.lerped.lerp(
-          // @ts-ignore
           ref.current.translation(),
           delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)),
         );
       });
 
       curve.points[0].copy(j3.current!.translation());
-      // @ts-ignore
       curve.points[1].copy(j2.current!.lerped);
-      // @ts-ignore
       curve.points[2].copy(j1.current!.lerped);
       curve.points[3].copy(fixed.current!.translation());
-      // @ts-ignore
       band.current!.geometry.setPoints(curve.getPoints(32));
 
       ang.copy(card.current!.angvel());
       rot.copy(card.current!.rotation());
-      // @ts-ignore
       card.current!.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
     }
   });
@@ -181,21 +175,16 @@ function Band({
   return (
     <>
       <group position={[0, 4, 0]}>
-        {/* @ts-ignore */}
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        {/* @ts-ignore */}
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        {/* @ts-ignore */}
         <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        {/* @ts-ignore */}
         <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        {/* @ts-ignore */}
         <RigidBody
           position={[2, 0, 0]}
           ref={card}
@@ -208,12 +197,12 @@ function Band({
             position={[0, -1.2, -0.05]}
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}
-            onPointerUp={(e: any) => {
-              e.target.releasePointerCapture(e.pointerId);
+            onPointerUp={(e) => {
+              e.target?.releasePointerCapture(e.pointerId);
               setDragged(false);
             }}
-            onPointerDown={(e: any) => {
-              e.target.setPointerCapture(e.pointerId);
+            onPointerDown={(e) => {
+              e.target?.setPointerCapture(e.pointerId);
               setDragged(
                 new THREE.Vector3()
                   .copy(e.point)
@@ -241,9 +230,7 @@ function Band({
         </RigidBody>
       </group>
       <mesh ref={band}>
-        {/* @ts-ignore */}
         <meshLineGeometry />
-        {/* @ts-ignore */}
         <meshLineMaterial
           color="white"
           depthTest={false}

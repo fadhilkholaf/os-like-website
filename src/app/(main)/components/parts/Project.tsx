@@ -6,45 +6,22 @@ import { H1, H3, H4, P } from "@/components/global/Text";
 import HR from "@/components/global/HR";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
+import { projects as data } from "@/utils/data";
 
 const variants: Variants = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
 };
 
-const projects: {
-  title: string;
-  year: string;
-  description: string;
-  image: string;
-}[] = [
-  {
-    title: "Kemenag Kota Malang",
-    year: "2024",
-    image: "/image/project/kemenag.png",
-    description: "Kementrian Agama Kota Malang employee performance report.",
-  },
-  {
-    title: "LKBB Antareja",
-    year: "2024",
-    image: "/image/project/antareja.png",
-    description: "Aksi Telkom Barisan Jawara competition by SMK Telkom Malang.",
-  },
-  {
-    title: "Moklet.org",
-    year: "2024",
-    image: "/image/project/mokletorg.png",
-    description: "SMK Telkom Malang organization website.",
-  },
-];
-
 const Project = () => {
   const [selected, setSelected] = useState<number>(0);
 
   return (
     <motion.div
-      className="flex h-full w-full max-w-[1280px] gap-x-4 overflow-y-auto"
-      variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
+      className="flex h-full w-full max-w-[1280px] gap-x-4 overflow-y-scroll"
+      variants={{
+        animate: { transition: { staggerChildren: 0.05, delayChildren: 0.5 } },
+      }}
     >
       <motion.div className="sticky top-0 w-1/3" variants={variants}>
         <AnimatePresence mode="wait">
@@ -57,7 +34,7 @@ const Project = () => {
             variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
           >
             <motion.img
-              src={projects[selected].image}
+              src={data[selected].image}
               alt="project"
               width={500}
               height={500}
@@ -66,8 +43,8 @@ const Project = () => {
               variants={variants}
             />
             <div className="flex flex-col gap-4">
-              <H4 variants={variants}>{projects[selected].title}</H4>
-              <P variants={variants}>{projects[selected].description}</P>
+              <H4 variants={variants}>{data[selected].title}</H4>
+              <P variants={variants}>{data[selected].description}</P>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -79,7 +56,7 @@ const Project = () => {
         </div>
         <HR />
         <ul className="flex flex-col gap-4 overflow-y-auto">
-          {projects.map((project, i) => (
+          {data.map((item, i) => (
             <motion.li
               key={i}
               className={cn(
@@ -91,8 +68,8 @@ const Project = () => {
               variants={variants}
               onClick={() => setSelected(i)}
             >
-              <P>{project.title}</P>
-              <P>{project.year}</P>
+              <P>{item.title}</P>
+              <P>{item.year}</P>
             </motion.li>
           ))}
         </ul>

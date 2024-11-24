@@ -7,7 +7,7 @@ import { Canvas } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
 
 import Navbar from "@/components/Navbar";
-import { Fluid } from "@/utils/fluid/Fluid";
+import Fluid from "@/utils/fluid/Fluid";
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -31,10 +31,22 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
             />
             <EffectComposer>
               <Fluid
+                radius={0.03}
+                curl={10}
+                swirl={5}
+                distortion={1}
+                force={2}
+                pressure={0.94}
+                densityDissipation={0.98}
+                velocityDissipation={0.99}
+                intensity={0.3}
+                rainbow={false}
+                blend={0}
+                // showBackground={true}
+                showBackground={false}
+                // backgroundColor="#a7958b"
                 fluidColor="#ffffff"
-                densityDissipation={0.9}
-                radius={0.05}
-                showBackground
+                // fluidColor="#cfc0a8"
               />
             </EffectComposer>
           </Canvas>

@@ -55,7 +55,7 @@ export const CursorFollowerProvider = ({
     return () => {
       window.removeEventListener("pointermove", handlePointerEvent);
     };
-  }, []);
+  });
 
   return (
     <CursorFollowerContext.Provider value={{ setContent }}>

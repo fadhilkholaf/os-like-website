@@ -1,11 +1,6 @@
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  ReactNode,
-} from "react";
+import { ReactNode } from "react";
 
-import { AnimationProps, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 import { cn } from "@/utils/cn";
 
